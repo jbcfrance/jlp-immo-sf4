@@ -4,12 +4,13 @@
 
 namespace App\Services;
 
-use Symfony\Component\Console\Logger\ConsoleLogger;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Finder\Finder;
-use \Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Yaml\Yaml;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -22,15 +23,15 @@ class JLPPasserelle
     /**
      *
      */
-    const LOCAL_PATH = "public/bundles/app/upload/";
+    const LOCAL_PATH = "public/upload/";
     /**
      *
      */
-    const TARGET_UNZIP_DIR = "web/bundles/admin/upload/connectimmo";
+    const TARGET_UNZIP_DIR = "public/upload/connectimmo";
     /**
      *
      */
-    const TARGET_IMAGE_DIR = "web/bundles/admin/images/source/";
+    const TARGET_IMAGE_DIR = "public/images/source/";
 
     /**
      * @var EntityManagerInterface
@@ -43,7 +44,7 @@ class JLPPasserelle
     protected $oXml;
 
     /**
-     * @var ConsoleLogger
+     * @var LoggerInterface
      */
     protected $oLogger;
   
@@ -119,10 +120,10 @@ class JLPPasserelle
      * 
      * Method lauching the process. 
      *
-     * @param ConsoleLogger  $oLogger
+     * @param LoggerInterface  $oLogger
      * @throws
      */
-    public function execute($oLogger, $oProgressBar)
+    public function execute(LoggerInterface $oLogger, $oProgressBar)
     {
 
     $this->oLogger = $oLogger;
@@ -232,7 +233,7 @@ class JLPPasserelle
         unset($oMoveImageProcess);
     }
     $this->oProgressBar->finish();
-    $this->oLogger->info(null);
+    $this->oLogger->info('');
     }
 
     /**
@@ -244,7 +245,7 @@ class JLPPasserelle
      */
     private function putAnnonceInStandBy()
     {
-    $aAnnonceEntities = $this->oEm->getRepository('AdminBundle:Annonce')->findAll();
+    $aAnnonceEntities = $this->oEm->getRepository('App:Annonce')->findAll();
 
     foreach ($aAnnonceEntities as $oAnnonce) {
 
@@ -265,7 +266,7 @@ class JLPPasserelle
     private function checkNegociateur()
     {
     $this->oLogger->info("Delete Negociateur without any annonce.");
-    $aNegociateurEntities = $this->oEm->getRepository('AdminBundle:Negociateur')->getNegociateurWithoutAnnonce();
+    $aNegociateurEntities = $this->oEm->getRepository('App:Negociateur')->getNegociateurWithoutAnnonce();
     foreach ($aNegociateurEntities as $oNegociateur) {
         $this->oEm->remove($oNegociateur);
 
@@ -283,7 +284,7 @@ class JLPPasserelle
     private function checkAgence()
     {
     $this->oLogger->info("Delete Agence without any Negociateur.");
-    $aAgenceEntities = $this->oEm->getRepository('AdminBundle:Agence')->getAgenceWithoutNegociateur();
+    $aAgenceEntities = $this->oEm->getRepository('App:Agence')->getAgenceWithoutNegociateur();
     foreach ($aAgenceEntities as $oAgence) {
         $this->oEm->remove($oAgence);
 
@@ -302,7 +303,7 @@ class JLPPasserelle
     private function deleteStandByAnnonce()
     {
     $this->oLogger->info("Delete Annonce still in standby");
-    $aAnnonceEntities = $this->oEm->getRepository('AdminBundle:Annonce')->findBy(array('statusAnnonce' => 'standby'));
+    $aAnnonceEntities = $this->oEm->getRepository('App:Annonce')->findBy(array('statusAnnonce' => 'standby'));
 
     $this->iNbAnnonceSuppr = count($aAnnonceEntities);
 

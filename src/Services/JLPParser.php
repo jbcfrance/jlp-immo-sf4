@@ -135,7 +135,7 @@ class JLPParser
     {
         $sEntityObjectName = 'o'.$aKeyInfos['entity']."Entity";
 
-        $oObjectName = $this->oEm->getRepository('AdminBundle:'.$aKeyInfos['entity'])
+        $oObjectName = $this->oEm->getRepository('App:'.$aKeyInfos['entity'])
                                 ->findOneBy(array($aKeyInfos['field']=>$oNode->$sKeyName->__toString()));
         if (!empty($oObjectName)) {
             $this->$sEntityObjectName = $oObjectName;
@@ -163,7 +163,7 @@ class JLPParser
     foreach ($aXmlTypeFields as $sFieldName => $aFieldInfos)  
     { 
         $sEntityObjectName = 'o'.$aFieldInfos['parent_entity']."Entity";
-        $oTypeEntity = $this->oEm->getRepository('AdminBundle:'.$aFieldInfos['entity'])
+        $oTypeEntity = $this->oEm->getRepository('App:'.$aFieldInfos['entity'])
                                 ->findOneBy(array("type"=>strtolower($oNode->{$sFieldName}->__toString())));
         if (!empty($oTypeEntity))
         {
@@ -262,7 +262,7 @@ class JLPParser
     {
     $iIdAnnonce = $oNode->{$this->oYmlMapping['passerelle']['xml_annonce_key']}->__toString();
     
-    $oAnnonceEntity = $this->oEm->getRepository('AdminBundle:Annonce')->findOneBy(array('id'=>$iIdAnnonce));
+    $oAnnonceEntity = $this->oEm->getRepository('App:Annonce')->findOneBy(array('id'=>$iIdAnnonce));
     
     $aImagesCollection = $oAnnonceEntity->getImages();
     
@@ -292,7 +292,7 @@ class JLPParser
     
     $iIdAnnonce = $oNode->{$this->oYmlMapping['passerelle']['xml_annonce_key']}->__toString();
     
-    $oAnnonceEntity = $this->oEm->getRepository('AdminBundle:Annonce')->findOneBy(array('id'=>$iIdAnnonce));
+    $oAnnonceEntity = $this->oEm->getRepository('App:Annonce')->findOneBy(array('id'=>$iIdAnnonce));
     
     foreach ($aAnnonceImages->{'photo'} as $oImageName)
     {
