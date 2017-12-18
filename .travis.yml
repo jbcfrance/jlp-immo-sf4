@@ -1,3 +1,16 @@
 language: php
 php:
   - 7.1.9
+
+addons:
+  sonarcloud:
+    organization: "jbcfrance-github"
+    token:
+      secure: "BnwwioRnr1fF7oBAxj2"
+jdk:
+  - oraclejdk8
+script:
+  - sonar-scanner
+cache:
+  directories:
+    - '$HOME/.sonar/cache'
