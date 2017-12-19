@@ -3,15 +3,15 @@ php:
 - 7.1.9
 addons:
   sonarcloud:
-    organization: jbcfrance-github
+    organization: "jbcfrance-github"
     token:
-      secure: BnwwioRnr1fF7oBAxj2
+      secure: "BnwwioRnr1fF7oBAxj2"
 jdk:
 - oraclejdk8
 script:
-- sonar-scanner -x
+- sonar-scanner
 cache:
   directories:
   - $HOME/.sonar/cache
 dd:
-  secure: EpkHgy29xEYplgX0LzXfcLmkMf1Z7BOBkZ/5uS8e8YSsysV4Nkn4VcQEsC3xcVhmogm0miBdaLp8p5LVj/enFnsXqIi5bvnYroeYDssTXNnbVjZlHs/XTtDcRLHkQRe/KGsiIMbksUSa03Ccn4WHQWJb58g4zbRS6WsieNkcWNCXg3zeA/mmjUw886Fx6FozTXJuYW7k00X/9C45SS+xLVNpMZDKG9oGgr4mytVTT37uJmAx5gsw8NyPAThJtQBuDx1s/afBOMGanArWGFIjJgbADXOxJ6ochrkrg4hwaR0ZNNd3sbQeOa02Onx147kDwVSaTyM2qox04X/aClziXWsyRRuwIwpIhy5DK4n7wnAii6DPVlX/0YY/4iEAzTsTCXJu6RVw8NfCkKpGry+qghCoZBIcTJ+JmAQf0ByfAKuyAmfrRdPkEdUo+2F4RZx//d/65G9CRjq+iI8GwJ0PmRl5fXWyyXUjCvB65D3HaU3E+EOlbKLXth8IR9phI9f0NvIXVVJAmZAyCwiu4Yuxnkj03PlqRxV1mDa9FVUORDWbM5h2EuoQN+f4yIqulIT/dkPxdpBngFwbaXRx5fI7kg/GKCd0AWHiewDfIQOQ9SF8TLEu3eBzqTFdvuXJX2MhkMMstqsE0D3hRAR137WbpBvKNNKauyN5QxIsDwo1ukk=
+  secure: "EpkHgy29xEYplgX0LzXfcLmkMf1Z7BOBkZ/5uS8e8YSsysV4Nkn4VcQEsC3xcVhmogm0miBdaLp8p5LVj/enFnsXqIi5bvnYroeYDssTXNnbVjZlHs/XTtDcRLHkQRe/KGsiIMbksUSa03Ccn4WHQWJb58g4zbRS6WsieNkcWNCXg3zeA/mmjUw886Fx6FozTXJuYW7k00X/9C45SS+xLVNpMZDKG9oGgr4mytVTT37uJmAx5gsw8NyPAThJtQBuDx1s/afBOMGanArWGFIjJgbADXOxJ6ochrkrg4hwaR0ZNNd3sbQeOa02Onx147kDwVSaTyM2qox04X/aClziXWsyRRuwIwpIhy5DK4n7wnAii6DPVlX/0YY/4iEAzTsTCXJu6RVw8NfCkKpGry+qghCoZBIcTJ+JmAQf0ByfAKuyAmfrRdPkEdUo+2F4RZx//d/65G9CRjq+iI8GwJ0PmRl5fXWyyXUjCvB65D3HaU3E+EOlbKLXth8IR9phI9f0NvIXVVJAmZAyCwiu4Yuxnkj03PlqRxV1mDa9FVUORDWbM5h2EuoQN+f4yIqulIT/dkPxdpBngFwbaXRx5fI7kg/GKCd0AWHiewDfIQOQ9SF8TLEu3eBzqTFdvuXJX2MhkMMstqsE0D3hRAR137WbpBvKNNKauyN5QxIsDwo1ukk="
